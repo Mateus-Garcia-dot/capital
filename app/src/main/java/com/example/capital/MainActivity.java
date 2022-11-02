@@ -2,15 +2,18 @@ package com.example.capital;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,21 +45,30 @@ public class MainActivity extends AppCompatActivity {
         getNewQuestion();
     }
 
+    public void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(
+                Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+    }
 
     public void checkAnswer(View view) {
+        hideKeyboard();
         if(etAnswer.length() == 0) {
             Toast.makeText(this, "Insira a capital!", Toast.LENGTH_LONG).show();
         } else {
             btnEnviar.setEnabled(false);
             btnNextQuestion.setEnabled(true);
-            String answer = etAnswer.getText().toString().toLowerCase();
-            if(currentQuestion.capital.toLowerCase().equals(answer)) {
+            etAnswer.setEnabled(false);
+            String answer = etAnswer.getText().toString().toLowerCase().trim();
+            if(currentQuestion.capital.toLowerCase().trim().equals(answer)) {
                 numeroAcertos++;
                 tvPontuacao.setText("Pontuação: " + numeroAcertos);
+                tvResultadoQuestao.setTextColor(Color.BLUE);
                 tvResultadoQuestao.setText("Parabéns, Você acertou!");
             } else {
                 tvPontuacao.setText("Pontuação: " + numeroAcertos);
                 tvResultadoQuestao.setText("Você errou!");
+                tvResultadoQuestao.setTextColor(Color.RED);
             }
         }
     }
@@ -72,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             btnNextQuestion.setEnabled(false);
             btnEnviar.setEnabled(true);
+            etAnswer.setEnabled(true);
             getNewQuestion();
         }
     }
