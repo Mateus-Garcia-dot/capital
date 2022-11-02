@@ -42,13 +42,15 @@
 
     <EditText
         android:id="@+id/editTextCapital"
-        android:layout_width="315dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="text"
         android:text="Capital"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.293"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewEstado" />
 
@@ -58,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="40dp"
-        android:onClick="capital"
+        android:onClick="checkAnswer"
         android:text="enviar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextCapital" />
@@ -67,9 +69,11 @@
         android:id="@+id/textViewAcertouOuNao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
         android:layout_marginTop="36dp"
+        android:layout_marginEnd="8dp"
         android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewPontos"
+        app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
@@ -77,12 +81,13 @@
         android:id="@+id/textViewPontos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="43dp"
-        android:text="Pontuação:"
+        android:layout_marginEnd="24dp"
+        android:text="Pontuação: 0"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewAcertouOuNao"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewAcertouOuNao" />
+        app:layout_constraintTop_toTopOf="@+id/textViewAcertouOuNao"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonProxPergunta"
@@ -90,7 +95,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="128dp"
-        android:onClick="proximaPergunta"
+        android:enabled="false"
+        android:onClick="nextQuestion"
         android:text="Próxima pergunta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPontos" />
